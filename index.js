@@ -32,7 +32,6 @@ function InvalidActionError(message) {
 };
 InvalidActionError.prototype = Object.create(Error.prototype);
 
-
 function InvalidArgumentsError(message) {
   Error.captureStackTrace(this, arguments.callee);
   this.name = 'InvalidArgumentsError';
@@ -72,6 +71,21 @@ function ServerProtocolError(message) {
 };
 ServerProtocolError.prototype = Object.create(Error.prototype);
 
+function HTTPServerError(message) {
+  Error.captureStackTrace(this, arguments.callee);
+  this.name = 'HTTPServerError';
+  this.message = message;
+};
+HTTPServerError.prototype = Object.create(Error.prototype);
+
+
+function ResourceLimitError(message) {
+  Error.captureStackTrace(this, arguments.callee);
+  this.name = 'ResourceLimitError';
+  this.message = message;
+};
+ResourceLimitError.prototype = Object.create(Error.prototype);
+
 
 function TimeoutError(message) {
   Error.captureStackTrace(this, arguments.callee);
@@ -89,6 +103,23 @@ function BrokerError(message) {
 BrokerError.prototype = Object.create(Error.prototype);
 
 
+function ProcessExitError(message, code) {
+  Error.captureStackTrace(this, arguments.callee);
+  this.name = 'ProcessExitError';
+  this.message = message;
+  this.code = code;
+};
+ProcessExitError.prototype = Object.create(Error.prototype);
+
+
+function UnknownError(message) {
+  Error.captureStackTrace(this, arguments.callee);
+  this.name = 'UnknownError';
+  this.message = message;
+};
+UnknownError.prototype = Object.create(Error.prototype);
+
+
 // Expose all error types
 
 module.exports = {
@@ -101,8 +132,12 @@ module.exports = {
   InvalidMessageError: InvalidMessageError,
   SocketProtocolError: SocketProtocolError,
   ServerProtocolError: ServerProtocolError,
+  HTTPServerError: HTTPServerError,
+  ResourceLimitError: ResourceLimitError,
   TimeoutError: TimeoutError,
-  BrokerError: BrokerError
+  BrokerError: BrokerError,
+  ProcessExitError: ProcessExitError,
+  UnknownError: UnknownError
 };
 
 module.exports.socketProtocolErrorStatuses = {
