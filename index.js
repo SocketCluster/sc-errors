@@ -165,9 +165,34 @@ module.exports.socketProtocolIgnoreStatuses = {
   1001: 'Socket hung up'
 };
 
+// Properties related to error domains cannot be serialized.
+var unserializableErrorProperties = {
+  domainEmitter: 1,
+  domain: 1
+};
+
+module.exports.dehydrateError = function (error, includeStackTrace) {
+  var dehydratedError;
+  if (typeof error == 'string') {
+      dehydratedError = error;
+  } else {
+    dehydratedError = {
+      message: error.message
+    };
+    if (includeStackTrace) {
+      dehydratedError.stack = error.stack;
+    }
+    for (var i in error) {
+      if (error.hasOwnProperty(i) && !unserializableErrorProperties[i]) {
+        dehydratedError[i] = error[i];
+      }
+    }
+  }
+  return dehydratedError;
+};
+
 module.exports.hydrateError = function (error) {
   var hydratedError = null;
-
   if (error != null) {
     if (typeof error == 'string') {
       hydratedError = error;
