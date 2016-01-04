@@ -183,9 +183,7 @@ module.exports.dehydrateError = function (error, includeStackTrace) {
       dehydratedError.stack = error.stack;
     }
     for (var i in error) {
-      if (error.hasOwnProperty(i) && !unserializableErrorProperties[i]) {
-        dehydratedError[i] = error[i];
-      }
+      dehydratedError[i] = error[i];
     }
   }
   return dehydratedError;
