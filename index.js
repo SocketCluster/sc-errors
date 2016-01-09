@@ -167,8 +167,9 @@ module.exports.socketProtocolIgnoreStatuses = {
 
 // Properties related to error domains cannot be serialized.
 var unserializableErrorProperties = {
+  domain: 1,
   domainEmitter: 1,
-  domain: 1
+  domainThrown: 1
 };
 
 module.exports.dehydrateError = function (error, includeStackTrace) {
@@ -183,7 +184,9 @@ module.exports.dehydrateError = function (error, includeStackTrace) {
       dehydratedError.stack = error.stack;
     }
     for (var i in error) {
-      dehydratedError[i] = error[i];
+      if (!unserializableErrorProperties[i]) {
+        dehydratedError[i] = error[i];
+      }
     }
   }
   return dehydratedError;
