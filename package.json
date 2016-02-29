@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/SocketCluster/sc-errors/issues"
   },
-  "homepage": "https://github.com/SocketCluster/sc-errors"
+  "homepage": "https://github.com/SocketCluster/sc-errors",
+  "dependencies": {
+    "cycle": "1.0.3"
+  }
 }

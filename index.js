@@ -1,3 +1,4 @@
+var cycle = require('cycle');
 
 function AuthTokenExpiredError(message, expiry) {
   if (Error.captureStackTrace) {
@@ -250,7 +251,7 @@ module.exports.dehydrateError = function (error, includeStackTrace) {
       }
     }
   }
-  return dehydratedError;
+  return cycle.decycle(dehydratedError);
 };
 
 module.exports.hydrateError = function (error) {
