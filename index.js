@@ -238,7 +238,7 @@ var unserializableErrorProperties = {
 
 module.exports.dehydrateError = function (error, includeStackTrace) {
   var dehydratedError;
-  if (typeof error == 'string') {
+  if (!error || typeof error == 'string') {
       dehydratedError = error;
   } else {
     dehydratedError = {
