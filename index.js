@@ -27,6 +27,31 @@ function AuthTokenInvalidError(message) {
 AuthTokenInvalidError.prototype = Object.create(Error.prototype);
 
 
+function AuthTokenNotBeforeError(message) {
+  if (Error.captureStackTrace && !isStrict) {
+    Error.captureStackTrace(this, arguments.callee);
+  } else {
+    this.stack = (new Error()).stack;
+  }
+  this.name = 'AuthTokenNotBeforeError';
+  this.message = message;
+};
+AuthTokenNotBeforeError.prototype = Object.create(Error.prototype);
+
+
+// For any other auth token error.
+function AuthTokenError(message) {
+  if (Error.captureStackTrace && !isStrict) {
+    Error.captureStackTrace(this, arguments.callee);
+  } else {
+    this.stack = (new Error()).stack;
+  }
+  this.name = 'AuthTokenError';
+  this.message = message;
+};
+AuthTokenError.prototype = Object.create(Error.prototype);
+
+
 function SilentMiddlewareBlockedError(message, type) {
   if (Error.captureStackTrace && !isStrict) {
     Error.captureStackTrace(this, arguments.callee);
@@ -188,6 +213,8 @@ UnknownError.prototype = Object.create(Error.prototype);
 module.exports = {
   AuthTokenExpiredError: AuthTokenExpiredError,
   AuthTokenInvalidError: AuthTokenInvalidError,
+  AuthTokenNotBeforeError: AuthTokenNotBeforeError,
+  AuthTokenError: AuthTokenError,
   SilentMiddlewareBlockedError: SilentMiddlewareBlockedError,
   InvalidActionError: InvalidActionError,
   InvalidArgumentsError: InvalidArgumentsError,
