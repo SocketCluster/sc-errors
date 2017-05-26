@@ -1,4 +1,4 @@
-var cycle = require('cycle');
+var decycle = require('./decycle');
 
 var isStrict = (function () { return !this; })();
 
@@ -280,7 +280,7 @@ module.exports.dehydrateError = function (error, includeStackTrace) {
       }
     }
   }
-  return cycle.decycle(dehydratedError);
+  return decycle(dehydratedError);
 };
 
 module.exports.hydrateError = function (error) {
