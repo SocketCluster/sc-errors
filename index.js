@@ -27,9 +27,10 @@ function AuthTokenInvalidError(message) {
 AuthTokenInvalidError.prototype = Object.create(Error.prototype);
 
 
-function AuthTokenNotBeforeError(message) {
+function AuthTokenNotBeforeError(message, date) {
   this.name = 'AuthTokenNotBeforeError';
   this.message = message;
+  this.date = date;
   if (Error.captureStackTrace && !isStrict) {
     Error.captureStackTrace(this, arguments.callee);
   } else {
