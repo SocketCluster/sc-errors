@@ -172,6 +172,18 @@ function TimeoutError(message) {
 TimeoutError.prototype = Object.create(Error.prototype);
 
 
+function BadConnectionError(message) {
+  this.name = 'BadConnectionError';
+  this.message = message;
+  if (Error.captureStackTrace && !isStrict) {
+    Error.captureStackTrace(this, arguments.callee);
+  } else {
+    this.stack = (new Error()).stack;
+  }
+};
+BadConnectionError.prototype = Object.create(Error.prototype);
+
+
 function BrokerError(message) {
   this.name = 'BrokerError';
   this.message = message;
@@ -226,6 +238,7 @@ module.exports = {
   HTTPServerError: HTTPServerError,
   ResourceLimitError: ResourceLimitError,
   TimeoutError: TimeoutError,
+  BadConnectionError: BadConnectionError,
   BrokerError: BrokerError,
   ProcessExitError: ProcessExitError,
   UnknownError: UnknownError
