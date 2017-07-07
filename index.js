@@ -11,7 +11,7 @@ function AuthTokenExpiredError(message, expiry) {
   } else {
     this.stack = (new Error()).stack;
   }
-};
+}
 AuthTokenExpiredError.prototype = Object.create(Error.prototype);
 
 
@@ -23,7 +23,7 @@ function AuthTokenInvalidError(message) {
   } else {
     this.stack = (new Error()).stack;
   }
-};
+}
 AuthTokenInvalidError.prototype = Object.create(Error.prototype);
 
 
@@ -36,7 +36,7 @@ function AuthTokenNotBeforeError(message, date) {
   } else {
     this.stack = (new Error()).stack;
   }
-};
+}
 AuthTokenNotBeforeError.prototype = Object.create(Error.prototype);
 
 
@@ -49,7 +49,7 @@ function AuthTokenError(message) {
   } else {
     this.stack = (new Error()).stack;
   }
-};
+}
 AuthTokenError.prototype = Object.create(Error.prototype);
 
 
@@ -62,7 +62,7 @@ function SilentMiddlewareBlockedError(message, type) {
   } else {
     this.stack = (new Error()).stack;
   }
-};
+}
 SilentMiddlewareBlockedError.prototype = Object.create(Error.prototype);
 
 
@@ -74,7 +74,7 @@ function InvalidActionError(message) {
   } else {
     this.stack = (new Error()).stack;
   }
-};
+}
 InvalidActionError.prototype = Object.create(Error.prototype);
 
 function InvalidArgumentsError(message) {
@@ -85,7 +85,7 @@ function InvalidArgumentsError(message) {
   } else {
     this.stack = (new Error()).stack;
   }
-};
+}
 InvalidArgumentsError.prototype = Object.create(Error.prototype);
 
 function InvalidOptionsError(message) {
@@ -96,7 +96,7 @@ function InvalidOptionsError(message) {
   } else {
     this.stack = (new Error()).stack;
   }
-};
+}
 InvalidOptionsError.prototype = Object.create(Error.prototype);
 
 
@@ -108,7 +108,7 @@ function InvalidMessageError(message) {
   } else {
     this.stack = (new Error()).stack;
   }
-};
+}
 InvalidMessageError.prototype = Object.create(Error.prototype);
 
 
@@ -121,7 +121,7 @@ function SocketProtocolError(message, code) {
   } else {
     this.stack = (new Error()).stack;
   }
-};
+}
 SocketProtocolError.prototype = Object.create(Error.prototype);
 
 
@@ -133,7 +133,7 @@ function ServerProtocolError(message) {
   } else {
     this.stack = (new Error()).stack;
   }
-};
+}
 ServerProtocolError.prototype = Object.create(Error.prototype);
 
 function HTTPServerError(message) {
@@ -144,7 +144,7 @@ function HTTPServerError(message) {
   } else {
     this.stack = (new Error()).stack;
   }
-};
+}
 HTTPServerError.prototype = Object.create(Error.prototype);
 
 
@@ -156,7 +156,7 @@ function ResourceLimitError(message) {
   } else {
     this.stack = (new Error()).stack;
   }
-};
+}
 ResourceLimitError.prototype = Object.create(Error.prototype);
 
 
@@ -168,7 +168,7 @@ function TimeoutError(message) {
   } else {
     this.stack = (new Error()).stack;
   }
-};
+}
 TimeoutError.prototype = Object.create(Error.prototype);
 
 
@@ -180,7 +180,7 @@ function BadConnectionError(message) {
   } else {
     this.stack = (new Error()).stack;
   }
-};
+}
 BadConnectionError.prototype = Object.create(Error.prototype);
 
 
@@ -192,7 +192,7 @@ function BrokerError(message) {
   } else {
     this.stack = (new Error()).stack;
   }
-};
+}
 BrokerError.prototype = Object.create(Error.prototype);
 
 
@@ -205,7 +205,7 @@ function ProcessExitError(message, code) {
   } else {
     this.stack = (new Error()).stack;
   }
-};
+}
 ProcessExitError.prototype = Object.create(Error.prototype);
 
 
@@ -217,7 +217,7 @@ function UnknownError(message) {
   } else {
     this.stack = (new Error()).stack;
   }
-};
+}
 UnknownError.prototype = Object.create(Error.prototype);
 
 
