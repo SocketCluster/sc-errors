@@ -172,9 +172,10 @@ function TimeoutError(message) {
 TimeoutError.prototype = Object.create(Error.prototype);
 
 
-function BadConnectionError(message) {
+function BadConnectionError(message, type) {
   this.name = 'BadConnectionError';
   this.message = message;
+  this.type = type;
   if (Error.captureStackTrace && !isStrict) {
     Error.captureStackTrace(this, arguments.callee);
   } else {
