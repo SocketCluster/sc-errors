@@ -1,6 +1,6 @@
 {
   "name": "sc-errors",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Error types for use throughout SocketCluster",
   "main": "index.js",
   "scripts": {
