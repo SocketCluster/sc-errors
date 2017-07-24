@@ -280,9 +280,8 @@ var unserializableErrorProperties = {
 
 module.exports.dehydrateError = function (error, includeStackTrace) {
   var dehydratedError;
-  if (!error || typeof error == 'string') {
-      dehydratedError = error;
-  } else {
+
+  if (error && typeof error == 'object') {
     dehydratedError = {
       message: error.message
     };
@@ -294,22 +293,27 @@ module.exports.dehydrateError = function (error, includeStackTrace) {
         dehydratedError[i] = error[i];
       }
     }
+  } else if (typeof error == 'function') {
+    dehydratedError = '[function ' + (error.name || 'anonymous') + ']';
+  } else {
+    dehydratedError = error;
   }
+
   return decycle(dehydratedError);
 };
 
 module.exports.hydrateError = function (error) {
   var hydratedError = null;
   if (error != null) {
-    if (typeof error == 'string') {
-      hydratedError = error;
-    } else {
+    if (typeof error == 'object') {
       hydratedError = new Error(error.message);
       for (var i in error) {
         if (error.hasOwnProperty(i)) {
           hydratedError[i] = error[i];
         }
       }
+    } else {
+      hydratedError = error;
     }
   }
   return hydratedError;
