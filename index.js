@@ -318,3 +318,5 @@ module.exports.hydrateError = function (error) {
   }
   return hydratedError;
 };
+
+module.exports.decycle = decycle;
