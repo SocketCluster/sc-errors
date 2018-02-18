@@ -222,7 +222,7 @@ function UnknownError(message) {
 UnknownError.prototype = Object.create(Error.prototype);
 
 
-// Expose all error types
+// Expose all error types.
 
 module.exports = {
   AuthTokenExpiredError: AuthTokenExpiredError,
@@ -278,7 +278,9 @@ var unserializableErrorProperties = {
   domainThrown: 1
 };
 
-module.exports.dehydrateError = function (error, includeStackTrace) {
+// Convert an error into a JSON-compatible type which can later be hydrated
+// back to its *original* form.
+module.exports.dehydrateError = function dehydrateError(error, includeStackTrace) {
   var dehydratedError;
 
   if (error && typeof error == 'object') {
@@ -302,7 +304,8 @@ module.exports.dehydrateError = function (error, includeStackTrace) {
   return decycle(dehydratedError);
 };
 
-module.exports.hydrateError = function (error) {
+// Convert a dehydrated error back to its *original* form.
+module.exports.hydrateError = function hydrateError(error) {
   var hydratedError = null;
   if (error != null) {
     if (typeof error == 'object') {
