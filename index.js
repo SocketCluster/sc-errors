@@ -263,7 +263,8 @@ module.exports.socketProtocolErrorStatuses = {
   4004: 'Client failed to save auth token',
   4005: 'Did not receive #handshake from client before timeout',
   4006: 'Failed to bind socket to message broker',
-  4007: 'Client connection establishment timed out'
+  4007: 'Client connection establishment timed out',
+  4008: 'Server rejected handshake from client'
 };
 
 module.exports.socketProtocolIgnoreStatuses = {
