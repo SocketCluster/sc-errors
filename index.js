@@ -52,6 +52,18 @@ function AuthTokenError(message) {
 }
 AuthTokenError.prototype = Object.create(Error.prototype);
 
+// For any other auth error; not specifically related to the auth token itself.
+function AuthError(message) {
+  this.name = 'AuthError';
+  this.message = message;
+  if (Error.captureStackTrace && !isStrict) {
+    Error.captureStackTrace(this, arguments.callee);
+  } else {
+    this.stack = (new Error()).stack;
+  }
+}
+AuthError.prototype = Object.create(Error.prototype);
+
 
 function SilentMiddlewareBlockedError(message, type) {
   this.name = 'SilentMiddlewareBlockedError';
@@ -229,6 +241,7 @@ module.exports = {
   AuthTokenInvalidError: AuthTokenInvalidError,
   AuthTokenNotBeforeError: AuthTokenNotBeforeError,
   AuthTokenError: AuthTokenError,
+  AuthError: AuthError,
   SilentMiddlewareBlockedError: SilentMiddlewareBlockedError,
   InvalidActionError: InvalidActionError,
   InvalidArgumentsError: InvalidArgumentsError,
