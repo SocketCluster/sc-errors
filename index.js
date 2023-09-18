@@ -324,7 +324,9 @@ module.exports.hydrateError = function hydrateError(error) {
   var hydratedError = null;
   if (error != null) {
     if (typeof error === 'object') {
-      hydratedError = new Error(error.message);
+      hydratedError = new Error(
+        typeof error.message === 'string' ? error.message : 'Invalid error message format'
+      );
       for (var i in error) {
         if (error.hasOwnProperty(i)) {
           hydratedError[i] = error[i];
