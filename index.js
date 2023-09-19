@@ -1,6 +1,6 @@
-var decycle = require('./decycle');
+const decycle = require('./decycle');
 
-var isStrict = (function () { return !this; })();
+const isStrict = (function () { return !this; })();
 
 function AuthTokenExpiredError(message, expiry) {
   this.name = 'AuthTokenExpiredError';
@@ -286,32 +286,20 @@ module.exports.socketProtocolIgnoreStatuses = {
   1001: 'Socket hung up'
 };
 
-// Properties related to error domains cannot be serialized.
-var unserializableErrorProperties = {
-  domain: 1,
-  domainEmitter: 1,
-  domainThrown: 1
-};
-
 // Convert an error into a JSON-compatible type which can later be hydrated
 // back to its *original* form.
-module.exports.dehydrateError = function dehydrateError(error, includeStackTrace) {
-  var dehydratedError;
+module.exports.dehydrateError = function dehydrateError(error) {
+  let dehydratedError;
 
   if (error && typeof error === 'object') {
     dehydratedError = {
       message: error.message
     };
-    if (includeStackTrace) {
-      dehydratedError.stack = error.stack;
-    }
-    for (var i in error) {
-      if (!unserializableErrorProperties[i]) {
-        dehydratedError[i] = error[i];
-      }
+    for (let i of Object.keys(error)) {
+      dehydratedError[i] = error[i];
     }
   } else if (typeof error === 'function') {
-    dehydratedError = '[function ' + (error.name || 'anonymous') + ']';
+    dehydratedError = '[function ' + (typeof error.name === 'string' ? error.name : 'anonymous') + ']';
   } else {
     dehydratedError = error;
   }
@@ -321,14 +309,17 @@ module.exports.dehydrateError = function dehydrateError(error, includeStackTrace
 
 // Convert a dehydrated error back to its *original* form.
 module.exports.hydrateError = function hydrateError(error) {
-  var hydratedError = null;
+  let hydratedError = null;
   if (error != null) {
     if (typeof error === 'object') {
       hydratedError = new Error(
         typeof error.message === 'string' ? error.message : 'Invalid error message format'
       );
-      for (var i in error) {
-        if (error.hasOwnProperty(i)) {
+      if (typeof error.name === 'string') {
+        hydratedError.name = error.name;
+      }
+      for (let i of Object.keys(error)) {
+        if (hydratedError[i] === undefined) {
           hydratedError[i] = error[i];
         }
       }
